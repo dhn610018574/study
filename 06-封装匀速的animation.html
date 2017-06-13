@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+function animate(element,target){
+    if(element.timer){
+        clearInterval(element.timer);
+    }
+    element.timer = setInterval(function(){
+        var leader = element.offsetLeft;
+        var step = target > leader ? 20 : -20;
+        if(Math.abs(target - leader) >= Math.abs(step)){
+            leader += step;
+            element.style.left = leader + 'px';
+        } else{
+            clearInterval(element.timer);
+            //抱过去
+            element.style.left = target + 'px';
+        }
+
+    },15)
+}
+
+</script>

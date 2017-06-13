@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body, ul, ol, li, img {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    #box {
+      width: 490px;
+      height: 270px;
+      padding: 5px;
+      position: relative;
+      border: 1px solid #ccc;
+      margin: 100px auto 0;
+    }
+    
+    .ad {
+      width: 490px;
+      height: 270px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    #box img {
+      width: 490px;
+    }
+    
+    .ad ol {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+    
+    .ad ol li {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+      background: #fff;
+      float: left;
+      margin-right: 10px;
+      cursor: pointer;
+      _display: inline;
+    }
+    
+    .ad ol li.current {
+      background: yellow;
+    }
+    
+    .ad ul li {
+      float: left;
+    }
+    
+    .ad ul {
+      position: absolute;
+      top: 0;
+      width: 2940px;
+    }
+    
+    .ad ul li.current {
+      display: block;
+    }
+    
+    #arr {
+      display: none;
+    }
+    
+    #arr span {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      left: 5px;
+      top: 50%;
+      margin-top: -20px;
+      background: #000;
+      cursor: pointer;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-family: '黑体';
+      font-size: 30px;
+      color: #fff;
+      opacity: 0.3;
+      border: 1px solid #fff;
+    }
+    
+    #arr #right {
+      right: 5px;
+      left: auto;
+    }
+  </style>
+</head>
+<body>
+<div id="box" class="all">
+  <div class="ad">
+    <ul id="imgList">
+      <li><img src="images/1.jpg"/></li>
+      <li><img src="images/2.jpg"/></li>
+      <li><img src="images/3.jpg"/></li>
+      <li><img src="images/4.jpg"/></li>
+      <li><img src="images/5.jpg"/></li>
+      <li><img src="images/1.jpg"/></li>
+    </ul>
+  </div>
+  <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+</div>
+
+<script src="../animate.js"></script>
+<script>
+  //1. 找对象
+  var box = document.getElementById("box");
+  var ad = box.children[0];
+  var ul = document.getElementById("imgList");
+  var arr = document.getElementById("arr");
+  var leftArr = document.getElementById("left");
+  var rightArr = document.getElementById("right");
+  var lis = ul.children;
+  var timer;
+  //给box注册鼠标经过事件，让arr显示
+  box.onmouseover = function () {
+    arr.style.display = "block";
+    //清除定时器
+    clearInterval(timer);
+  };
+  //给box注册鼠标离开事件，让arr隐藏
+  box.onmouseout = function () {
+    arr.style.display = "none";
+  
+    timer = setInterval(function () {
+      rightArr.onclick();
+    },1000);
+  };
+  //给leftArr注册点击事件，让图片向右跑动
+  var count = 0;//记录跑出去的图片张数
+  leftArr.onclick = function () {
+    //判断图片跑出去的张数，如果张数是0就不再跑动
+    if (count <= 0) {
+      //如果是最后一张图片了，瞬间把最后一张假图片换成真图片
+      count = lis.length - 1;
+      ul.style.left = -count*ad.offsetWidth + "px";
+      
+    }
+    //每次跑动一张，减去一张
+    count--;
+    //获取图片跑动的距离
+    var target = -count * ad.offsetWidth;
+    animate(ul, target);
+  };
+  //给rightArr注册点击事件，让图片向左跑动
+  rightArr.onclick = function () {
+    //判断图片是否跑到了最后一张，如果是最后一张，不再跑动
+    if(count >= lis.length-1){
+      //如果跑到了最后一张，瞬间拉回到第一张，把假图片瞬间换成真图片
+      count = 0;
+      ul.style.left = "0px";
+    }
+    //每次跑动一张，增加跑出去的张数
+    count++;
+    //获取跑出去的距离
+    var target  = -count*ad.offsetWidth;
+    animate(ul,target);
+  };
+  timer = setInterval(function () {
+    rightArr.onclick();
+  },1000);
+
+</script>
+</body>
+</html>

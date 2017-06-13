@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    div{
+      margin:200px auto;
+      width:252px;
+      height: 86px;
+      overflow: hidden;
+      border: 1px solid #000;
+    }
+    ul{
+      width:2000%;
+      height: 86px;
+      animation: move 7s linear infinite;
+    }
+    li{
+      width: 126px;
+      height: 86px;
+      float: left;
+    }
+    img{
+      width: 126px;
+      height: 86px;
+    }
+    @keyframes move {
+      from{
+        transform: translatex(0px);
+      }
+      to{
+        transform:translatex(-882px);
+      }
+    }
+  </style>
+</head>
+<body>
+<div>
+<ul>
+  <li><img src="images/1.jpg" alt=""></li>
+  <li><img src="images/2.jpg" alt=""></li>
+  <li><img src="images/3.jpg" alt=""></li>
+  <li><img src="images/4.jpg" alt=""></li>
+  <li><img src="images/5.jpg" alt=""></li>
+  <li><img src="images/6.jpg" alt=""></li>
+  <li><img src="images/7.jpg" alt=""></li>
+  <li><img src="images/1.jpg" alt=""></li>
+  <li><img src="images/2.jpg" alt=""></li>
+  <li><img src="images/3.jpg" alt=""></li>
+  <li><img src="images/4.jpg" alt=""></li>
+  <li><img src="images/5.jpg" alt=""></li>
+  <li><img src="images/6.jpg" alt=""></li>
+  <li><img src="images/7.jpg" alt=""></li>
+</ul>
+</div>
+</body>
+</html>

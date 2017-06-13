@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    #box {
+      width: 1200px;
+      height: 400px;
+      border: 2px solid #000;
+      margin: 100px auto;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    #box ul {
+      width: 1200px;
+    }
+    
+    #box li {
+      width: 1200px;
+      height: 400px;
+      /*border: 1px solid #000;*/
+      /*float: left;*/
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+
+<script src="animate.js"></script>
+<script>
+  
+  var box = document.getElementById("box");
+  var lis = box.getElementsByTagName("li");
+  //设置背景图
+  for (var i = 0; i < lis.length; i++) {
+    lis[i].index = i;
+    lis[i].style.backgroundImage = "url(images/" + (i + 1) + ".jpg)";
+    lis[i].style.left = i * 240 + "px";
+    
+    
+    //1. 给li注册鼠标经过事件，让当前li和li之前的left设置为 i *100 ，后面的li设置为 i*100+700
+    lis[i].onmouseover = function () {
+      for (var i = 0; i < lis.length; i++) {
+        if (i <= this.index) {
+          animate(lis[i], {left: i * 100});
+        } else {
+          animate(lis[i], {left: i * 100 + 700});
+        }
+      }
+      
+    };
+    
+    //2. 给li注册鼠标离开事件，所有的li都变成240.
+    lis[i].onmouseout = function () {
+      for (var i = 0; i < lis.length; i++) {
+        animate(lis[i], {left: i * 240});
+      }
+      
+    };
+  }
+
+</script>
+</body>
+</html>

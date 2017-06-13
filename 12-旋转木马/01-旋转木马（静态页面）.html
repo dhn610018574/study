@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>旋转木马轮播图</title>
+  <link rel="stylesheet" href="css/css.css"/>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <div class="slide" id="slide">
+    <ul>
+      <li><a href="#"><img src="images/slidepic1.jpg" alt=""/></a></li>
+      <li><a href="#"><img src="images/slidepic2.jpg" alt=""/></a></li>
+      <li><a href="#"><img src="images/slidepic3.jpg" alt=""/></a></li>
+      <li><a href="#"><img src="images/slidepic4.jpg" alt=""/></a></li>
+      <li id="last"><a href="#"><img src="images/slidepic5.jpg" alt=""/></a></li>
+    </ul>
+    <div class="arrow" id="arrow">
+      <a href="javascript:;" class="prev" id="arrLeft"></a>
+      <a href="javascript:;" class="next" id="arrRight"></a>
+    </div>
+  </div>
+</div>
+
+
+<script src="animate.js"></script>
+<script>
+  var datas = [
+    {
+      "width": 400,
+      "top": 20,
+      "left": 50,
+      "opacity": 0.2,
+      "zIndex": 2
+    },//0
+    {
+      "width": 600,
+      "top": 70,
+      "left": 0,
+      "opacity": 0.8,
+      "zIndex": 3
+    },//1
+    {
+      "width": 800,
+      "top": 100,
+      "left": 200,
+      "opacity": 1,
+      "zIndex": 4
+    },//2
+    {
+      width: 600,
+      top: 70,
+      left: 600,
+      opacity: 0.8,
+      zIndex: 3
+    },//3
+    {
+      "width": 400,
+      "top": 20,
+      "left": 750,
+      "opacity": 0.2,
+      "zIndex": 2
+    }//4
+  ];
+  var slide = document.getElementById("slide");
+  var lis = slide.getElementsByTagName("li");
+  var arrow = document.getElementById("arrow");
+  var arrLeft = document.getElementById("arrLeft");
+  var arrRight = document.getElementById("arrRight");
+  //遍历所有的li，让每一个li拿到一个位置
+  for (var i = 0; i < lis.length; i++) {
+    animate(lis[i], datas[i]);
+  }
+  //让箭头显示
+  slide.onmouseover = function () {
+    animate(arrow,{opacity : 1})
+  };
+  slide.onmouseout = function () {
+    animate(arrow,{opacity : 0})
+  };
+  //点击箭头旋转木马
+  //节流阀是开着的
+  var flag = true;
+  arrRight.onclick = function () {
+    //判断节流阀是否开着,如果开着执行代码
+    if(flag){
+      //如果节流阀开着，进去执行代码，关门
+      flag = false;
+      //让数组的最后一项变成第一项
+      datas.unshift(datas.pop());
+      //重新给li排位置
+      for (var i = 0; i < lis.length; i++) {
+        animate(lis[i], datas[i] ,function () {
+          //执行完动画，打开节流阀
+          flag = true;
+        });
+      }
+    }
+    
+  };
+  arrLeft.onclick = function () {
+    if(flag) {
+      flag = false;
+      //让数组的第一项跑到数组最后一项
+      datas.push(datas.shift());
+      for (var i = 0; i < lis.length; i++) {
+        animate(lis[i], datas[i],function () {
+          flag = true;
+        });
+      }
+    }
+    
+  };
+
+</script>
+
+</body>
+</html>

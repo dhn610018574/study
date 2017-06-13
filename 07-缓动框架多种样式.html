@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    #box {
+      height: 100px;
+      width: 100px;
+      background-color: green;
+      position: absolute;
+      border:1px solid blue;
+      /*transition: all 1s;*/
+    }
+  
+  </style>
+</head>
+<body>
+<input type="button" value="按钮1" id="btn1">
+<input type="button" value="按钮2" id="btn2">
+<div id="box"></div>
+<script>
+  //找对象
+  var btn1 = document.getElementById("btn1");
+  var btn2 = document.getElementById("btn2");
+  var box = document.getElementById("box");
+  var timer;
+  //给btn1注册点击事件
+  btn1.onclick = function () {
+    animate(box,{
+//      height:400,
+//      width:300,
+      borderWidth:30
+//      borderRadius:100,
+//      marginLeft:100
+    });
+//    box.style.backgroundColor = 'blue';
+//    box.style.height = "400px";
+  };
+//获取最终样式 兼容性封装
+function getStyle(element,attr){
+if(window.getComputedStyle){
+    return getComputedStyle(element,null)[attr];
+}else{
+    return element.currentStyle[attr];
+}
+}
+
+function animate(element,obj){
+    if(element.timer){
+        clearInterval(timer);
+    }
+    timer = setInterval(function(){
+        var flag = true;
+        for(var k in obj){
+            var attr = k;
+            var target = attr[k];
+            var leader = getStyle(element,attr);
+            leader = parseInt(leader) || 0;//处理leader带px问题
+            var step = (target - leader) / 10;
+            step = step > 0?Math.ceil(step):Math.floor(step);
+            leader = leader + step;
+            element.style[attr] = leader + 'px';
+            if(leader != target){
+                flag = false;
+            }
+        }
+        if(flag){
+            clearInterval(element.timer);
+        }
+    },15)
+}
+  
+
+
+</script>
+</body>
+</html>

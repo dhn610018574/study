@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getSort(arr){
+            for(var i = 0; i < arr.length; i++){
+                var flag = true;
+                for(var j = 0; j < arr.length - 1 - i; j++){
+                    if(arr[j]>arr[j+1]){
+                        flag = false;
+                        var temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = temp;
+                    }
+                }
+                if(flag){
+                    break;
+                }
+                 return arr;
+            }
+        }
+
+
+    </script>
+</body>
+</html>

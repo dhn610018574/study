@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    div{
+      width: 500px;
+      height: 380px;
+      margin:100px auto;
+      border: 1px solid #000;
+      position: relative;
+    }
+    ul{
+      /*width: 500px;*/
+      height: 100%;
+      width: 20%;
+      position: relative;
+      transform-style: preserve-3d;
+      float: left;
+    }
+    /*修改li的定位*/
+    .box ul:nth-child(2) li{
+      background-position: -100px 0 ;
+    }
+    .box ul:nth-child(3) li{
+      background-position: -200px 0 ;
+    }
+    .box ul:nth-child(4) li{
+      background-position: -300px 0 ;
+    }
+    .box ul:nth-child(5) li{
+      background-position: -400px 0 ;
+    }
+
+    li{
+      width: 100%;
+      height:100%;
+      position: absolute;
+    }
+    .box li:nth-child(1) {
+      background: url(images/01.jpg) no-repeat;
+      transform: translateZ(190px);
+    }
+
+    .box li:nth-child(2) {
+      background: url(images/02.jpg) no-repeat;
+      transform: rotateX(90deg) translateZ(190px);
+    }
+
+    .box li:nth-child(3) {
+      background: url(images/03.jpg) no-repeat;
+      transform: rotateX(180deg) translateZ(190px);
+    }
+
+    .box li:nth-child(4) {
+      background: url(images/04.jpg) no-repeat;
+      transform: rotateX(270deg) translateZ(190px);
+    }
+
+    .arr-left,.arr-right{
+      width: 100px;
+      height:100px;
+      position: absolute;
+      top:50%;
+      color:#fff;
+      background-color: #f92;
+      font:700 24px/100px "宋体";
+      text-align: center;
+      border-radius: 5px;
+      transform: translatey(-50%);
+      cursor: pointer;
+    }
+    .arr-left{
+
+      left:-100px;
+
+    }
+    .arr-right{
+      right:-100px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="box">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <a class="arr-left">上一张</a>
+  <a class="arr-right">下一张</a>
+</div>
+<script>
+  var arrLeft = document.querySelector(".arr-left");
+  var arrRight = document.querySelector(".arr-right");
+  var uls = document.querySelectorAll(".box>ul");
+  var count = 0;
+  var flag = true;
+  arrLeft.addEventListener("click",function(){
+    if(flag){
+      flag=false;
+      count--;
+      for(var i = 0; i < uls.length; i++){
+        uls[i].style.transition = "all .5s "+i*0.1+"s";
+        uls[i].style.transform = "rotatex("+90*count+"deg)";
+      }
+
+    }
+
+  });
+  uls[uls.length-1].addEventListener("transitionend",function(){
+    flag = true;
+  })
+  arrRight.addEventListener("click",function(){
+    if(flag){
+      flag = false;
+      count++;
+      for(var i = 0; i < uls.length; i++){
+        uls[i].style.transition = "all .5s "+i*0.1+"s";
+        uls[i].style.transform = "rotatex("+90*count+"deg)";
+    }
+
+    }
+  });
+
+</script>
+</body>
+</html>

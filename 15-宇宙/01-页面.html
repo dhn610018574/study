@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    html,body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      background: url("bg.jpg");
+    }
+    ul,li{
+      box-sizing: border-box;
+    }
+    ul{
+      width: 600px;
+      height: 600px;
+      /*border: 1px solid #f92;*/
+      position: relative;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    li{
+      position: absolute;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border: 1px solid #f92;
+      border-radius: 50%;
+      animation: move 5s linear infinite;
+    }
+    li span{
+      position: absolute;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+    }
+    li:nth-child(1){
+      width: 540px;
+      height: 540px;
+      animation-duration: 80s;
+    }
+    li:nth-child(1)>span{
+      background-color: red;
+      top:196px;
+      left:0;
+    }
+    li:nth-child(2){
+      width: 480px;
+      height: 480px;
+      animation-duration: 65s;
+    }
+    li:nth-child(2)>span{
+      background-color: #987;
+      top:169px;
+      left:0;
+    }
+    li:nth-child(3){
+      width: 420px;
+      height: 420px;
+      animation-duration: 50s;
+    }
+    li:nth-child(3)>span{
+      background-color: #54d;
+      top:144px;
+      left:0;
+    }
+    li:nth-child(4){
+      width: 360px;
+      height: 360px;
+      animation-duration: 42s;
+    }
+    li:nth-child(4)>span{
+      background-color: cyan;
+      top:118px;
+      left:0;
+    }
+    li:nth-child(5){
+      width: 300px;
+      height: 300px;
+      animation-duration: 30s;
+      background: url("asteroids_meteorids.png");
+      background-size:300px 300px ;
+    }
+    li:nth-child(5)>span{
+      background-color: pink;
+      top:92px;
+      left:0;
+    }
+    li:nth-child(6){
+      width: 240px;
+      height: 240px;
+      animation-duration: 15s;
+
+    }
+    li:nth-child(6)>span{
+      height: 20px;
+      width: 20px;
+      background-color:green;
+      top: 55px;
+      right:0;
+      animation: move 4s linear infinite;
+      animation-duration: 5s;
+    }
+    li:nth-child(6)>span>span{
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      top:-5px;
+      left:-10px;
+    }
+    li:nth-child(7){
+      width: 180px;
+      height: 180px;
+      animation-duration: 10s;
+    }
+    li:nth-child(7)>span{
+      background-color: blue;
+      top:44px;
+      left:0;
+    }
+    li:nth-child(8){
+      width: 120px;
+      height: 120px;
+      animation-duration: 5s;
+    }
+    li:nth-child(8)>span{
+      background-color: yellow;
+      top:23px;
+      left:0;
+    }
+    li:nth-child(9){
+      width: 60px;
+      height: 60px;
+      background-color: gold;
+      border:none;
+      box-shadow: 0 0 30px 10px gold;
+    }
+    @keyframes move {
+      from{
+        transform:translate(-50%,-50%) rotate(0deg);
+      }
+      to{
+        transform:translate(-50%,-50%) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<ul>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li><span><span></span></span></li>
+  <li><span></span></li>
+  <li><span></span></li>
+  <li></li>
+</ul>
+</body>
+</html>

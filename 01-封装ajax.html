@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封装ajax</title>
+</head>
+<body>
+    <script>
+        // 封装ajax
+        function Ajax(options){
+            //1.检查参数
+            if(options || typeof options !== "Object"){
+                return false;
+            }
+            // 处理默认参数
+            var url = options.url || location.pathname;
+            var type = options.type == "post"?"post":"get";
+            var async = options.async==='false'?false:true;
+            //处理data数据为k=value的形式
+            var dataStr = "";
+            for(var k in data){
+                dataStr += key + "=" + data[k] + "&"; 
+            }
+            dataStr = dataStr.slice(0,-1);
+            //创建xhr对象
+            var xhr = new XMLHttpRequest();
+            //处理get和post请求的差异
+            if(type === 'get'){
+                xhr.open('get',url + "?" + dataStr,async);
+                xhr.send(null);
+            }else{
+                xhr.open(type,url,async);
+                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+                xhr.send(dataStr);
+            }
+            //监听请求响应数据
+            xhr.onreadystatechange = function(){
+                // 请求完成
+                if(xhr.readyState===4){
+                    // 请求成功
+                    if(xhr.status===200){
+                        var contentType = xhr.getResponseHeader('content-type');
+                        var result = null;
+                        if(contentType.indexOf('xml') > -1){
+                            result = xhr.responseXML;
+                        }else if(contentType.indexOf('json') > -1){
+                            // json格式需要转换成js对象
+                            result = JSON.parse(xhr.responseText);
+                        }else{
+                            result = xhr.responseText;
+                        }
+                        options.success && options.success(result);
+                    }else{
+                        //请求失败
+                        options.error && options.error(status,statusText);
+
+                    }
+                }
+            }
+        }
+
+
+        // 利用命名空间防止全局变量污染
+        window.itcast = {
+            Ajax: function(options){
+            //1.检查参数
+            if(options || typeof options !== "Object"){
+                return false;
+            }
+            // 处理默认参数
+            var url = options.url || location.pathname;
+            var type = options.type == "post"?"post":"get";
+            var async = options.async==='false'?false:true;
+            //处理data数据为k=value的形式
+            var dataStr = "";
+            for(var k in data){
+                dataStr += key + "=" + data[k] + "&"; 
+            }
+            dataStr = dataStr.slice(0,-1);
+            //创建xhr对象
+            var xhr = new XMLHttpRequest();
+            //处理get和post请求的差异
+            if(type === 'get'){
+                xhr.open('get',url + "?" + dataStr,async);
+                xhr.send(null);
+            }else{
+                xhr.open(type,url,async);
+                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+                xhr.send(dataStr);
+            }
+            //监听请求响应数据
+            xhr.onreadystatechange = function(){
+                // 请求完成
+                if(xhr.readyState===4){
+                    // 请求成功
+                    if(xhr.status===200){
+                        var contentType = xhr.getResponseHeader('content-type');
+                        var result = null;
+                        if(contentType.indexOf('xml') > -1){
+                            result = xhr.responseXML;
+                        }else if(contentType.indexOf('json') > -1){
+                            // json格式需要转换成js对象
+                            result = JSON.parse(xhr.responseText);
+                        }else{
+                            result = xhr.responseText;
+                        }
+                        options.success && options.success(result);
+                    }else{
+                        //请求失败
+                        options.error && options.error(status,statusText);
+
+                    }
+                }
+            }
+        }
+        }
+
+        
+
+
+
+
+
+
+    </script>
+</body>
+</html>
